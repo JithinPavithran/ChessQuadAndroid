@@ -18,7 +18,7 @@ public class Utls {
     }
 
     public static int intOf(char n){
-        return (int) (n<'a' ? n-'0' : n-'a');
+        return (int) (n<'a' ? n-'0' : n-'a'+10);
     }
 
 }

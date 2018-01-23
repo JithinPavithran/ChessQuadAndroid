@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -50,6 +52,9 @@ public class Board{
         this.maxHighId = 2000;
 
         mtx = new Piece[12][12];
+        for (Piece[] row: this.mtx){
+            Arrays.fill(row, null);
+        }
     }
 
     public void init(){
@@ -58,7 +63,6 @@ public class Board{
         set_left();
         set_bottom();
     }
-
     protected void set_top(){
         addPiece(2,0,'r', 't');
         addPiece(3,0,'n', 't');
@@ -143,6 +147,10 @@ public class Board{
                 mtx[x][y] = new Pawn(this,
                         ""+hex(x)+hex(y)+color+type, side, maxId);
                 break;
+            case 'r':
+                mtx[x][y] = new Rook(this,
+                        ""+hex(x)+hex(y)+color+type, side, maxId);
+                break;
             default:
                 mtx[x][y] = new Piece(this,
                         ""+hex(x)+hex(y)+color+type, side, maxId);
@@ -150,9 +158,11 @@ public class Board{
     }
 
     public void addHighlight(char x, char y){
-        maxHighId = maxHighId + 1;
-        HighlightView h = new HighlightView(x, y, this, maxHighId);
-        highlights.add(h);
+        if(this.validCell(x,y)){
+            maxHighId = maxHighId + 1;
+            HighlightView h = new HighlightView(x, y, this, maxHighId);
+            highlights.add(h);
+        }
     }
 
     public void clearHighlights(){
@@ -165,9 +175,11 @@ public class Board{
     }
 
     public void pieceClicked(Piece piece){
-        this.clearHighlights();
-        this.activePiece = piece;
-        piece.addHighlight();
+        if(piece.side == 'b'){
+            this.clearHighlights();
+            this.activePiece = piece;
+            piece.addHighlight();
+        }
     }
 
     public void highlightClicked(HighlightView hv){
@@ -177,9 +189,14 @@ public class Board{
 
     public void moveActivePiece(char x, char y){
         Log.d("Moving", "piece");
+        mtx[intOf(this.activePiece.X)][intOf(this.activePiece.Y)] = null;
+        if(mtx[intOf(x)][intOf(y)]!=null){
+            this.layout.removeView(mtx[intOf(x)][intOf(y)]);
+            mtx[intOf(x)][intOf(y)] = null;
+            System.gc();
+        }
         this.activePiece.moveTo(x, y);
         mtx[intOf(x)][intOf(y)] = this.activePiece;
-        mtx[intOf(this.activePiece.X)][intOf(this.activePiece.Y)] = null;
     }
 
     public void setPosition(int id, char x, char y){
@@ -191,6 +208,13 @@ public class Board{
         conSet.connect(id, ConstraintSet.TOP, resources.getIdentifier("gly"+y, "id", context.getPackageName()), ConstraintSet.TOP, 0);
         conSet.connect(id, ConstraintSet.BOTTOM, resources.getIdentifier("gly"+next(y), "id", context.getPackageName()), ConstraintSet.BOTTOM, 0);
         conSet.applyTo(layout);
+    }
+
+    public boolean validCell(char x, char y) {
+        return !((x == '0' || x == '1' || x == 'a' || x == 'b')
+                        && (y == '0' || y == '1'))
+                && !((x == '0' || x == '1' || x == 'a' || x == 'b')
+                        && (y == 'a' || y == 'b'));
     }
 
 }

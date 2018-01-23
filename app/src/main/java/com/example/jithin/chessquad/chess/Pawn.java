@@ -4,6 +4,7 @@ import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.View;
 
+import static com.example.jithin.chessquad.chess.Utls.intOf;
 import static com.example.jithin.chessquad.chess.Utls.pre;
 
 /**
@@ -19,10 +20,12 @@ public class Pawn extends Piece {
     @Override
     public void addHighlight(){
         Log.d("Adding Highlight", "Pawn");
-        if(side=='b'){
-            board.addHighlight(this.X, pre(this.Y));
-            if(this.Y=='a'){
-                board.addHighlight(this.X, pre(pre(this.Y)));
+        if(this.Y > '0'){
+            if(board.mtx[intOf(X)][intOf(pre(Y))] == null) {
+                board.addHighlight(X, pre(Y));
+                if (Y == 'a' && board.mtx[intOf(X)][intOf(pre(pre(Y)))] == null) {
+                    board.addHighlight(X, pre(pre(Y)));
+                }
             }
         }
     }
