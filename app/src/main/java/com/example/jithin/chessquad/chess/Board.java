@@ -164,6 +164,14 @@ public class Board{
                 mtx[x][y] = new Queen(this,
                         ""+hex(x)+hex(y)+color+type, side, maxId);
                 break;
+            case 'n':
+                mtx[x][y] = new Knight(this,
+                        ""+hex(x)+hex(y)+color+type, side, maxId);
+                break;
+            case 'k':
+                mtx[x][y] = new King(this,
+                        ""+hex(x)+hex(y)+color+type, side, maxId);
+                break;
             default:
                 mtx[x][y] = new Piece(this,
                         ""+hex(x)+hex(y)+color+type, side, maxId);
