@@ -5,11 +5,8 @@ import android.content.res.Resources;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import com.example.jithin.chessquad.R;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -27,12 +24,14 @@ public class Board{
     protected Piece mtx[][];
     protected List<ImageView> highlights = new ArrayList<ImageView>();
     protected ConstraintLayout layout;
+    protected char[] colors = {'b', 'y', 'r', 'g'};
     public char color(char side){
         switch (side){
-            case 't': return 'r';
-            case 'l': return 'g';
-            case 'r': return 'y';
-            case 'b': return 'b';
+            case 'b': return this.colors[0];
+            case 'r': return this.colors[1];
+            case 't': return this.colors[2];
+            case 'l': return this.colors[3];
+            default: Log.e("Unknown side", "side '"+side+"' is not recognised");
         }
         return 'b';
     }
@@ -44,11 +43,10 @@ public class Board{
     protected Piece activePiece;
     protected int highlightImage;
 
-
     public Board(ConstraintLayout layout){
         this.layout = layout;
         this.resources = layout.getContext().getResources();
-        this.playerInit();
+        this.playerInit('b');
         this.highlighListener = new HighlighListener(this);
         this.pieceListener = new PieceListener(this);
         this.maxId = 1000;
@@ -59,8 +57,15 @@ public class Board{
             Arrays.fill(row, null);
         }
     }
-    protected void playerInit(){
+
+    protected void playerInit(char mycolor){
         this.highlightImage = R.drawable.highlight;
+        char[] colors = this.colors.clone();
+        int j=0;
+        while (mycolor!=colors[j]){ j++; }
+        for(int i=0; i<4; ++i){
+            this.colors[i] = colors[(i+j)%4];
+        }
     }
     public void init(){
         set_top();
@@ -142,7 +147,6 @@ public class Board{
         addPiece(9,10,'p', 'b');
     }
 
-
     public void addPiece(int x, int y, char type, char side){
         // TODO: add return Type
         char color = this.color(side);
@@ -173,8 +177,7 @@ public class Board{
                         ""+hex(x)+hex(y)+color+type, side, maxId);
                 break;
             default:
-                mtx[x][y] = new Piece(this,
-                        ""+hex(x)+hex(y)+color+type, side, maxId);
+                Log.e("Unknown Piece", "Piece type '"+type+"' is not recognized");
         }
     }
 
