@@ -16,56 +16,53 @@ public class Rook extends Piece {
 
     @Override
     public void addHighlight(){
+        Rook.addHigh(this.X, this.Y, this.board);
+    }
+    
+    public static void addHigh(char X, char Y, Board board){
         Log.d("Adding Highlight", "Rook");
-        int y = intOf(this.Y)-1;
-        int x = intOf(this.X);
+        int y = intOf(Y)-1;
+        int x = intOf(X);
         while (y >= 0){
             if(board.mtx[x][y]==null) {
                 board.addHighlight(X, hex(y));
-                y = y-1;
-            }
-            else if(board.mtx[x][y].side!='b'){
+                --y;
+            } else if(board.mtx[x][y].side!='b'){
                 board.addHighlight(X, hex(y));
                 break;
-            }
-            else{ break; }
+            } else{ break; }
         }
-        y = intOf(this.Y)+1;
+        y = intOf(Y)+1;
         while (y <= 11){
             if(board.mtx[x][y]==null) {
                 board.addHighlight(X, hex(y));
-                y = y + 1;
-            }
-            else if(board.mtx[x][y].side!='b'){
+                ++y;
+            } else if(board.mtx[x][y].side!='b'){
                 board.addHighlight(X, hex(y));
                 break;
-            }
-            else{ break; }
+            } else{ break; }
         }
-        y = intOf(this.Y);
+        y = intOf(Y);
         x = x - 1;
         while (x >= 0){
             if(board.mtx[x][y]==null){
                 board.addHighlight(hex(x), Y);
                 x = x - 1;
-            }
-            else if(board.mtx[x][y].side!='b'){
+            } else if(board.mtx[x][y].side!='b'){
                 board.addHighlight(hex(x), Y);
                 break;
-            }
-            else{ break; }
+            } else{ break; }
         }
         x = intOf(X) + 1;
         while (x <= 11){
             if(board.mtx[x][y]==null){
                 board.addHighlight(hex(x), Y);
                 x = x + 1;
-            }
-            else if(board.mtx[x][y].side!='b'){
+            } else if(board.mtx[x][y].side!='b'){
                 board.addHighlight(hex(x), Y);
                 break;
-            }
-            else { break; }
+            } else { break; }
         }
     }
+    
 }

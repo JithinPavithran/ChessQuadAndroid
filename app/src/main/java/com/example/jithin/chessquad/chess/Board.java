@@ -7,6 +7,7 @@ import android.support.constraint.ConstraintSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import com.example.jithin.chessquad.R;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -41,11 +42,13 @@ public class Board{
     protected HighlighListener highlighListener;
     protected PieceListener pieceListener;
     protected Piece activePiece;
+    protected int highlightImage;
 
 
     public Board(ConstraintLayout layout){
         this.layout = layout;
         this.resources = layout.getContext().getResources();
+        this.playerInit();
         this.highlighListener = new HighlighListener(this);
         this.pieceListener = new PieceListener(this);
         this.maxId = 1000;
@@ -56,7 +59,9 @@ public class Board{
             Arrays.fill(row, null);
         }
     }
-
+    protected void playerInit(){
+        this.highlightImage = R.drawable.highlight;
+    }
     public void init(){
         set_top();
         set_right();
@@ -151,6 +156,14 @@ public class Board{
                 mtx[x][y] = new Rook(this,
                         ""+hex(x)+hex(y)+color+type, side, maxId);
                 break;
+            case 'b':
+                mtx[x][y] = new Bishop(this,
+                        ""+hex(x)+hex(y)+color+type, side, maxId);
+                break;
+            case 'q':
+                mtx[x][y] = new Queen(this,
+                        ""+hex(x)+hex(y)+color+type, side, maxId);
+                break;
             default:
                 mtx[x][y] = new Piece(this,
                         ""+hex(x)+hex(y)+color+type, side, maxId);
@@ -177,6 +190,11 @@ public class Board{
     public void pieceClicked(Piece piece){
         if(piece.side == 'b'){
             this.clearHighlights();
+            if(this.activePiece != null &&
+                    this.activePiece.getId() == piece.getId()) {
+                this.activePiece = null;
+                return;
+            }
             this.activePiece = piece;
             piece.addHighlight();
         }
@@ -185,6 +203,7 @@ public class Board{
     public void highlightClicked(HighlightView hv){
         this.moveActivePiece(hv.Xcoord, hv.Ycoord);
         this.clearHighlights();
+        this.activePiece = null;
     }
 
     public void moveActivePiece(char x, char y){
