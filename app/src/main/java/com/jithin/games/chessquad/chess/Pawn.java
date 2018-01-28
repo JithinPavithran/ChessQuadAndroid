@@ -1,11 +1,11 @@
-package com.example.jithin.chessquad.chess;
+package com.jithin.games.chessquad.chess;
 
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.View;
 
-import static com.example.jithin.chessquad.chess.Utls.intOf;
-import static com.example.jithin.chessquad.chess.Utls.pre;
+import static com.jithin.games.chessquad.chess.Utls.intOf;
+import static com.jithin.games.chessquad.chess.Utls.pre;
 
 /**
  * Created by jithin on 17/1/18.

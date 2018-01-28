@@ -1,4 +1,4 @@
-package com.example.jithin.chessquad.chess;
+package com.jithin.games.chessquad.chess;
 
 /**
  * Created by jithin on 24/1/18.

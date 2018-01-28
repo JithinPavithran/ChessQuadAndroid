@@ -1,4 +1,4 @@
-package com.example.jithin.chessquad.chess;
+package com.jithin.games.chessquad.chess;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -6,15 +6,15 @@ import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.util.Log;
 import android.widget.ImageView;
-import com.example.jithin.chessquad.R;
+import com.jithin.games.chessquad.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.example.jithin.chessquad.chess.Utls.hex;
-import static com.example.jithin.chessquad.chess.Utls.intOf;
-import static com.example.jithin.chessquad.chess.Utls.next;
+import static com.jithin.games.chessquad.chess.Utls.hex;
+import static com.jithin.games.chessquad.chess.Utls.intOf;
+import static com.jithin.games.chessquad.chess.Utls.next;
 
 /**
  * Created by jithin on 16/1/18.

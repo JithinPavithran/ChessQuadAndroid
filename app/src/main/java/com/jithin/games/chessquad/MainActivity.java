@@ -1,12 +1,12 @@
-package com.example.jithin.chessquad;
+package com.jithin.games.chessquad;
 
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import com.example.jithin.chessquad.chess.Board;
+import com.jithin.games.chessquad.chess.Board;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "com.example.jithin.chessquad.MESSAGE";
+    public static final String EXTRA_MESSAGE = "com.jithin.games.chessquadMESSAGE";
     public Board board;
 
     @Override

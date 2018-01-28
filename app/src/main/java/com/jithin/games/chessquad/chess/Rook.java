@@ -1,8 +1,8 @@
-package com.example.jithin.chessquad.chess;
+package com.jithin.games.chessquad.chess;
 
 import android.util.Log;
 
-import static com.example.jithin.chessquad.chess.Utls.*;
+import static com.jithin.games.chessquad.chess.Utls.*;
 
 /**
  * Created by jithin on 23/1/18.

@@ -1,4 +1,4 @@
-package com.example.jithin.chessquad.chess;
+package com.jithin.games.chessquad.chess;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,8 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-import static com.example.jithin.chessquad.chess.Utls.intOf;
-import static com.example.jithin.chessquad.chess.Utls.next;
+import static com.jithin.games.chessquad.chess.Utls.intOf;
+import static com.jithin.games.chessquad.chess.Utls.next;
 
 /**
  * Created by jithin on 13/1/18.

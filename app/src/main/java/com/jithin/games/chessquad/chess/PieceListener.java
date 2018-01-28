@@ -1,4 +1,4 @@
-package com.example.jithin.chessquad.chess;
+package com.jithin.games.chessquad.chess;
 
 import android.util.Log;
 import android.view.View;

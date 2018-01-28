@@ -1,4 +1,4 @@
-package com.example.jithin.chessquad;
+package com.jithin.games.chessquad;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

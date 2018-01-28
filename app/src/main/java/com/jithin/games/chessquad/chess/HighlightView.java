@@ -1,9 +1,9 @@
-package com.example.jithin.chessquad.chess;
+package com.jithin.games.chessquad.chess;
 
 import android.annotation.SuppressLint;
 import android.support.constraint.ConstraintLayout;
 import android.widget.ImageView;
-import com.example.jithin.chessquad.R;
+import com.jithin.games.chessquad.R;
 
 /**
  * Created by jithin on 23/1/18.

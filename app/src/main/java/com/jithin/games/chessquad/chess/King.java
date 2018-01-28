@@ -1,9 +1,9 @@
-package com.example.jithin.chessquad.chess;
+package com.jithin.games.chessquad.chess;
 
 import android.util.Log;
 
-import static com.example.jithin.chessquad.chess.Utls.hex;
-import static com.example.jithin.chessquad.chess.Utls.intOf;
+import static com.jithin.games.chessquad.chess.Utls.hex;
+import static com.jithin.games.chessquad.chess.Utls.intOf;
 
 /**
  * Created by jithin on 24/1/18.

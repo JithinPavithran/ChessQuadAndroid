@@ -1,4 +1,4 @@
-package com.example.jithin.chessquad;
+package com.jithin.games.chessquad;
 
 import org.junit.Test;
 
