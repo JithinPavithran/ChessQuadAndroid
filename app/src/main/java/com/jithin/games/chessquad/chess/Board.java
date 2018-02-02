@@ -31,6 +31,7 @@ public class Board{
             case 'r': return this.colors[1];
             case 't': return this.colors[2];
             case 'l': return this.colors[3];
+            case 'z': return 'z';
             default: Log.e("Unknown side", "side '"+side+"' is not recognised");
         }
         return 'b';
@@ -68,10 +69,32 @@ public class Board{
         }
     }
     public void init(){
+        set_inactive();
         set_top();
         set_right();
         set_left();
         set_bottom();
+    }
+    protected void set_inactive(){
+        addPiece(0,0,'z', 'z');
+        addPiece(1,0,'z', 'z');
+        addPiece(0,1,'z', 'z');
+        addPiece(1,1,'z', 'z');
+
+        addPiece(10,0,'z', 'z');
+        addPiece(11,0,'z', 'z');
+        addPiece(10,1,'z', 'z');
+        addPiece(11,1,'z', 'z');
+
+        addPiece(0,10,'z', 'z');
+        addPiece(1,10,'z', 'z');
+        addPiece(0,11,'z', 'z');
+        addPiece(1,11,'z', 'z');
+
+        addPiece(10,10,'z', 'z');
+        addPiece(11,10,'z', 'z');
+        addPiece(10,11,'z', 'z');
+        addPiece(11,11,'z', 'z');
     }
     protected void set_top(){
         addPiece(2,0,'r', 't');
@@ -174,6 +197,10 @@ public class Board{
                 break;
             case 'k':
                 mtx[x][y] = new King(this,
+                        ""+hex(x)+hex(y)+color+type, side, maxId);
+                break;
+            case 'z':
+                mtx[x][y] = new Piece(this,
                         ""+hex(x)+hex(y)+color+type, side, maxId);
                 break;
             default:
