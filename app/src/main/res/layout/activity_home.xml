@@ -18,7 +18,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/goToGame"
-            android:id="@+id/Login"
+            android:id="@+id/login"
             android:onClick="login"/>
+
+    <Button
+        android:text="Logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/login"
+        android:id="@+id/logout"
+        android:onClick="logout"/>
 
 </android.support.constraint.ConstraintLayout>
