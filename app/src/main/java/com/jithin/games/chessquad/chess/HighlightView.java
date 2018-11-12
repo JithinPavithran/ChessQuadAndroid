@@ -18,7 +18,7 @@ public class HighlightView extends ImageView {
     public HighlightView(char x, char y, Board board, int id){
         super(board.layout.getContext());
         this.setImageResource(board.highlightImage);
-        this.setLayoutParams(new ConstraintLayout.LayoutParams(0,0));
+        this.setLayoutParams(new ConstraintLayout.LayoutParams(board.unit,board.unit));
         board.layout.addView(this);
         this.setOnClickListener(board.highlighListener);
         Xcoord = x;

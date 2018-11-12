@@ -1,11 +1,13 @@
 package com.jithin.games.chessquad.chess;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v7.widget.AppCompatImageView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,7 +44,7 @@ public class Piece extends ImageView{
         Context context = layout.getContext();
 
         setImage(context);
-        this.setLayoutParams(new ConstraintLayout.LayoutParams(0,0));
+        this.setLayoutParams(new ConstraintLayout.LayoutParams(board.unit,board.unit));
         layout.addView(this);
         setOnClickListener(board.pieceListener);
         this.setId(id);

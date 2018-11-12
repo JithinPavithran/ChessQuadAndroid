@@ -1,9 +1,11 @@
 package com.jithin.games.chessquad.chess;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.ImageView;
 import com.jithin.games.chessquad.R;
@@ -24,6 +26,7 @@ public class Board{
     protected Piece mtx[][];
     protected List<ImageView> highlights = new ArrayList<ImageView>();
     protected ConstraintLayout layout;
+    protected int unit;                             // side of a cell
     protected char[] colors = {'b', 'y', 'r', 'g'};
     public char color(char side){
         switch (side){
@@ -44,8 +47,9 @@ public class Board{
     protected Piece activePiece;
     protected int highlightImage;
 
-    public Board(ConstraintLayout layout){
+    public Board(ConstraintLayout layout, int unit){
         this.layout = layout;
+        this.unit = unit;
         this.resources = layout.getContext().getResources();
         this.playerInit('b');
         this.highlighListener = new HighlighListener(this);
@@ -261,8 +265,6 @@ public class Board{
         ConstraintSet conSet = new ConstraintSet();
         conSet.clone(layout);
         conSet.connect(id, ConstraintSet.LEFT, resources.getIdentifier("glx"+x, "id", context.getPackageName()), ConstraintSet.LEFT, 0);
-        conSet.connect(id, ConstraintSet.END, resources.getIdentifier("glx"+next(x), "id", context.getPackageName()), ConstraintSet.END, 0);
-        conSet.connect(id, ConstraintSet.TOP, resources.getIdentifier("gly"+y, "id", context.getPackageName()), ConstraintSet.TOP, 0);
         conSet.connect(id, ConstraintSet.BOTTOM, resources.getIdentifier("gly"+next(y), "id", context.getPackageName()), ConstraintSet.BOTTOM, 0);
         conSet.applyTo(layout);
     }
