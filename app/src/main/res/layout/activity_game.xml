@@ -100,37 +100,37 @@
         <android.support.constraint.Guideline
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/gly0"
+                android:id="@+id/glyc"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.0"/>
         <android.support.constraint.Guideline
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/gly1"
+                android:id="@+id/glyb"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.08333333"/>
         <android.support.constraint.Guideline
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/gly2"
+                android:id="@+id/glya"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.16666666"/>
         <android.support.constraint.Guideline
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/gly3"
+                android:id="@+id/gly9"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.25"/>
         <android.support.constraint.Guideline
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/gly4"
+                android:id="@+id/gly8"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.333333333"/>
         <android.support.constraint.Guideline
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/gly5"
+                android:id="@+id/gly7"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.41666667"/>
         <android.support.constraint.Guideline
@@ -142,37 +142,37 @@
         <android.support.constraint.Guideline
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/gly7"
+                android:id="@+id/gly5"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.58333333"/>
         <android.support.constraint.Guideline
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/gly8"
+                android:id="@+id/gly4"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.66666667"/>
         <android.support.constraint.Guideline
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/gly9"
+                android:id="@+id/gly3"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.75000000"/>
         <android.support.constraint.Guideline
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/glya"
+                android:id="@+id/gly2"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.83333333"/>
         <android.support.constraint.Guideline
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/glyb"
+                android:id="@+id/gly1"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.91666667"/>
         <android.support.constraint.Guideline
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/glyc"
+                android:id="@+id/gly0"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="1.0"/>
 

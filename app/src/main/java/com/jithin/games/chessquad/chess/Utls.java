@@ -21,4 +21,20 @@ public class Utls {
         return (int) (n<'a' ? n-'0' : n-'a'+10);
     }
 
+    public static char right(char n){
+        return next(n);
+    }
+
+    public static char left(char n){
+        return pre(n);
+    }
+
+    public static char up(char n){
+        return next(n);
+    }
+
+    public static char down(char n){
+        return pre(n);
+    }
+
 }

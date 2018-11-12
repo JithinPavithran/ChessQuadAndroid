@@ -25,6 +25,14 @@ public class Piece extends ImageView{
     /* Piece String: <Xcoord><Y><color><Piece type>
      *
      */
+    public static final char PAWN    = 'p';
+    public static final char ROOK    = 'r';
+    public static final char KNIGHt  = 'n';
+    public static final char BISHOP  = 'b';
+    public static final char QUEEN   = 'q';
+    public static final char KING    = 'k';
+    public static final char DUMMY   = 'z';
+
     protected char X;
     protected char Y;
     protected char color;

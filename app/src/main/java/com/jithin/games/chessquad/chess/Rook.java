@@ -27,7 +27,7 @@ public class Rook extends Piece {
             if(board.mtx[x][y]==null) {
                 board.addHighlight(X, hex(y));
                 --y;
-            } else if(board.mtx[x][y].side!='b'){
+            } else if(board.mtx[x][y].side!=Board.MINE){
                 board.addHighlight(X, hex(y));
                 break;
             } else{ break; }
@@ -37,7 +37,7 @@ public class Rook extends Piece {
             if(board.mtx[x][y]==null) {
                 board.addHighlight(X, hex(y));
                 ++y;
-            } else if(board.mtx[x][y].side!='b'){
+            } else if(board.mtx[x][y].side!=Board.MINE){
                 board.addHighlight(X, hex(y));
                 break;
             } else{ break; }
@@ -48,7 +48,7 @@ public class Rook extends Piece {
             if(board.mtx[x][y]==null){
                 board.addHighlight(hex(x), Y);
                 x = x - 1;
-            } else if(board.mtx[x][y].side!='b'){
+            } else if(board.mtx[x][y].side!=Board.MINE){
                 board.addHighlight(hex(x), Y);
                 break;
             } else{ break; }
@@ -58,7 +58,7 @@ public class Rook extends Piece {
             if(board.mtx[x][y]==null){
                 board.addHighlight(hex(x), Y);
                 x = x + 1;
-            } else if(board.mtx[x][y].side!='b'){
+            } else if(board.mtx[x][y].side!=Board.MINE){
                 board.addHighlight(hex(x), Y);
                 break;
             } else { break; }

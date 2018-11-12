@@ -28,7 +28,7 @@ public class Bishop extends Piece {
             if (board.mtx[x][y] == null) {
                 board.addHighlight(hex(x), hex(y));
                 --x; --y;
-            } else if (board.mtx[x][y].side != 'b') {
+            } else if (board.mtx[x][y].side != Board.MINE) {
                 board.addHighlight(hex(x), hex(y));
                 break;
             } else { break; }
@@ -39,7 +39,7 @@ public class Bishop extends Piece {
             if(board.mtx[x][y] == null){
                 board.addHighlight(hex(x), hex(y));
                 ++x; --y;
-            } else if(board.mtx[x][y].side!='b'){
+            } else if(board.mtx[x][y].side!=Board.MINE){
                 board.addHighlight(hex(x), hex(y));
                 break;
             } else{ break; }
@@ -50,7 +50,7 @@ public class Bishop extends Piece {
             if(board.mtx[x][y] == null){
                 board.addHighlight(hex(x), hex(y));
                 ++x; ++y;
-            } else if(board.mtx[x][y].side!='b'){
+            } else if(board.mtx[x][y].side!=Board.MINE){
                 board.addHighlight(hex(x), hex(y));
                 break;
             } else{ break; }
@@ -61,7 +61,7 @@ public class Bishop extends Piece {
             if(board.mtx[x][y] == null){
                 board.addHighlight(hex(x), hex(y));
                 --x; ++y;
-            } else if(board.mtx[x][y].side!='b'){
+            } else if(board.mtx[x][y].side!=Board.MINE){
                 board.addHighlight(hex(x), hex(y));
                 break;
             } else{ break; }
