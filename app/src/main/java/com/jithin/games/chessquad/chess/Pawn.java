@@ -19,7 +19,7 @@ public class Pawn extends Piece {
     @Override
     public void addHighlight(){
         Log.d("Adding Highlight", "Pawn");
-        if(this.Y != '1'){
+        if(this.Y != '0'){
             /* UP move */
             if(board.mtx[intOf(X)][intOf(up(Y))] == null) {
                 board.addHighlight(X, up(Y));
