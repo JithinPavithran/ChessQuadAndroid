@@ -63,16 +63,18 @@ public class Piece extends ImageView{
         this.setImageResource(image_id);
     }
 
-    public void attachToBoard(final Board board, final View view,
+    public void attachToBoard(final Board board, final Piece piece,
                               final int view_id, final char x, final char y){
         ((GameActivity)getContext()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                board.layout.addView(view);
-                view.setOnClickListener(board.pieceListener);
-                view.setId(view_id);
-                view.setX(board.unit*intOf(x));
-                view.setY(board.unit*intOf(y));
+                board.layout.addView(piece);
+                if(piece.side==Board.MINE && piece.type!=Piece.DUMMY){
+                    piece.setOnClickListener(board.pieceListener);
+                }
+                piece.setId(view_id);
+                piece.setX(board.unit*intOf(x));
+                piece.setY(board.unit*intOf(y));
             }
         });
     }
