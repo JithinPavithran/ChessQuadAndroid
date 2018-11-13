@@ -7,6 +7,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.util.Log;
 import android.util.TimingLogger;
+import android.view.View;
 import android.widget.ImageView;
 import com.jithin.games.chessquad.GameActivity;
 import com.jithin.games.chessquad.R;
@@ -25,7 +26,7 @@ import static com.jithin.games.chessquad.chess.Utls.intOf;
  * Created by jithin on 16/1/18.
  */
 
-public class Board extends AsyncTask<Object, Void, Void>{
+public class Board{
     public static final char RIGHT  = 'r';
     public static final char BOTTOM = 'b';
     public static final char TOP    = 't';
@@ -61,6 +62,20 @@ public class Board extends AsyncTask<Object, Void, Void>{
     protected Piece activePiece;
     protected int highlightImage;
 
+    private class LoadPieces extends AsyncTask<Object, Void, Void> {
+        protected Void doInBackground(Object... objects) {
+            Method method = (Method)objects[0];
+            try {
+                method.invoke(objects[1]);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
     public Board(ConstraintLayout layout, int unit){
         this.layout = layout;
         this.unit = unit;
@@ -73,17 +88,6 @@ public class Board extends AsyncTask<Object, Void, Void>{
         this.mtx = new Piece[12][12];
     }
 
-    protected Void doInBackground(Object ... object){
-        Method method = (Method)object[0];
-        try {
-            method.invoke(object[1]);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     protected void playerInit(char mycolor){
         this.highlightImage = R.drawable.highlight;
@@ -96,26 +100,18 @@ public class Board extends AsyncTask<Object, Void, Void>{
     }
     public void init(){
         try {
-            Method method = Board.class.getMethod("set_top");
-            doInBackground(method, this);
-            method = Board.class.getMethod("set_right");
-            doInBackground(method, this);
-            method = Board.class.getMethod("set_left");
-            doInBackground(method, this);
-            method = Board.class.getMethod("set_bottom");
-            doInBackground(method, this);
-            method = Board.class.getMethod("set_inactive");
-            doInBackground(method, this);
+            (new LoadPieces()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Board.class.getMethod("set_top"), this);
+            (new LoadPieces()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Board.class.getMethod("set_right"), this);
+            (new LoadPieces()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Board.class.getMethod("set_bottom"), this);
+            (new LoadPieces()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Board.class.getMethod("set_left"), this);
+            (new LoadPieces()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Board.class.getMethod("set_inactive"), this);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
-//        set_bottom();
-//        set_inactive();
-//        set_left();
-//        set_right();
-//        set_top();
     }
 
+    /* Following methods are called from init Asyc-ly*/
+    /* Setting X, Y origin on top left keeps system clean as top-left is always fixed */
     protected void set_inactive(){
         addPiece(0,0,Piece.DUMMY, Board.MINE);
         addPiece(0,1,Piece.DUMMY, Board.MINE);
@@ -137,23 +133,23 @@ public class Board extends AsyncTask<Object, Void, Void>{
         addPiece(10,11,Piece.DUMMY, Board.MINE);
         addPiece(11,11,Piece.DUMMY, Board.MINE);
     }
-    protected void set_bottom(){
-        addPiece(2,0,Piece.ROOK,   Board.BOTTOM);
-        addPiece(3,0,Piece.KNIGHt, Board.BOTTOM);
-        addPiece(4,0,Piece.BISHOP, Board.BOTTOM);
-        addPiece(5,0,Piece.QUEEN,  Board.BOTTOM);
-        addPiece(6,0,Piece.KING,   Board.BOTTOM);
-        addPiece(7,0,Piece.BISHOP, Board.BOTTOM);
-        addPiece(8,0,Piece.KNIGHt, Board.BOTTOM);
-        addPiece(9,0,Piece.ROOK, Board.BOTTOM);
-        addPiece(2,1,Piece.PAWN, Board.BOTTOM);
-        addPiece(3,1,Piece.PAWN, Board.BOTTOM);
-        addPiece(4,1,Piece.PAWN, Board.BOTTOM);
-        addPiece(5,1,Piece.PAWN, Board.BOTTOM);
-        addPiece(6,1,Piece.PAWN, Board.BOTTOM);
-        addPiece(7,1,Piece.PAWN, Board.BOTTOM);
-        addPiece(8,1,Piece.PAWN, Board.BOTTOM);
-        addPiece(9,1,Piece.PAWN, Board.BOTTOM);
+    protected void set_top(){
+        addPiece(2,0,Piece.ROOK,   Board.TOP);
+        addPiece(3,0,Piece.KNIGHt, Board.TOP);
+        addPiece(4,0,Piece.BISHOP, Board.TOP);
+        addPiece(5,0,Piece.QUEEN,  Board.TOP);
+        addPiece(6,0,Piece.KING,   Board.TOP);
+        addPiece(7,0,Piece.BISHOP, Board.TOP);
+        addPiece(8,0,Piece.KNIGHt, Board.TOP);
+        addPiece(9,0,Piece.ROOK, Board.TOP);
+        addPiece(2,1,Piece.PAWN, Board.TOP);
+        addPiece(3,1,Piece.PAWN, Board.TOP);
+        addPiece(4,1,Piece.PAWN, Board.TOP);
+        addPiece(5,1,Piece.PAWN, Board.TOP);
+        addPiece(6,1,Piece.PAWN, Board.TOP);
+        addPiece(7,1,Piece.PAWN, Board.TOP);
+        addPiece(8,1,Piece.PAWN, Board.TOP);
+        addPiece(9,1,Piece.PAWN, Board.TOP);
     }
     protected void set_right(){
         addPiece(11,2,Piece.ROOK,   Board.RIGHT);
@@ -192,23 +188,23 @@ public class Board extends AsyncTask<Object, Void, Void>{
         addPiece(1,9,Piece.PAWN, Board.LEFT);
 
     }
-    protected void set_top(){
-        addPiece(2,11,Piece.ROOK,   Board.TOP);
-        addPiece(3,11,Piece.KNIGHt, Board.TOP);
-        addPiece(4,11,Piece.BISHOP, Board.TOP);
-        addPiece(5,11,Piece.QUEEN,  Board.TOP);
-        addPiece(6,11,Piece.KING,   Board.TOP);
-        addPiece(7,11,Piece.BISHOP, Board.TOP);
-        addPiece(8,11,Piece.KNIGHt, Board.TOP);
-        addPiece(9,11,Piece.ROOK, Board.TOP);
-        addPiece(2,10,Piece.PAWN, Board.TOP);
-        addPiece(3,10,Piece.PAWN, Board.TOP);
-        addPiece(4,10,Piece.PAWN, Board.TOP);
-        addPiece(5,10,Piece.PAWN, Board.TOP);
-        addPiece(6,10,Piece.PAWN, Board.TOP);
-        addPiece(7,10,Piece.PAWN, Board.TOP);
-        addPiece(8,10,Piece.PAWN, Board.TOP);
-        addPiece(9,10,Piece.PAWN, Board.TOP);
+    protected void set_bottom(){
+        addPiece(2,11,Piece.ROOK,   Board.BOTTOM);
+        addPiece(3,11,Piece.KNIGHt, Board.BOTTOM);
+        addPiece(4,11,Piece.BISHOP, Board.BOTTOM);
+        addPiece(5,11,Piece.QUEEN,  Board.BOTTOM);
+        addPiece(6,11,Piece.KING,   Board.BOTTOM);
+        addPiece(7,11,Piece.BISHOP, Board.BOTTOM);
+        addPiece(8,11,Piece.KNIGHt, Board.BOTTOM);
+        addPiece(9,11,Piece.ROOK, Board.BOTTOM);
+        addPiece(2,10,Piece.PAWN, Board.BOTTOM);
+        addPiece(3,10,Piece.PAWN, Board.BOTTOM);
+        addPiece(4,10,Piece.PAWN, Board.BOTTOM);
+        addPiece(5,10,Piece.PAWN, Board.BOTTOM);
+        addPiece(6,10,Piece.PAWN, Board.BOTTOM);
+        addPiece(7,10,Piece.PAWN, Board.BOTTOM);
+        addPiece(8,10,Piece.PAWN, Board.BOTTOM);
+        addPiece(9,10,Piece.PAWN, Board.BOTTOM);
     }
 
     public void addPiece(int x, int y, char type, char side){
@@ -295,29 +291,6 @@ public class Board extends AsyncTask<Object, Void, Void>{
         this.activePiece.moveTo(x, y);
         mtx[intOf(x)][intOf(y)] = this.activePiece;
     }
-
-    public void setPosition(int id, char x, char y){
-        Context context = layout.getContext();
-        ConstraintSet conSet = new ConstraintSet();
-        conSet.clone(layout);
-        conSet.connect(id, ConstraintSet.LEFT, resources.getIdentifier("glx"+x, "id", context.getPackageName()), ConstraintSet.LEFT, 0);
-        conSet.connect(id, ConstraintSet.BOTTOM, resources.getIdentifier("gly"+y, "id", context.getPackageName()), ConstraintSet.BOTTOM, 0);
-        conSet.applyTo(layout);
-//        final ConstraintSet _conSet = conSet;
-//
-//        ((GameActivity)layout.getContext()).runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                _conSet.applyTo(layout);
-//            }
-//        });
-
-    }
-
-    public void setPosition(ConstraintSet constraintSet){
-        constraintSet.applyTo(layout);
-    }
-
 
     public boolean validCell(char x, char y) {
         return !((x == '0' || x == '1' || x == 'a' || x == 'b')

@@ -30,11 +30,11 @@ public class Utls {
     }
 
     public static char up(char n){
-        return next(n);
+        return pre(n);
     }
 
     public static char down(char n){
-        return pre(n);
+        return next(n);
     }
 
 }

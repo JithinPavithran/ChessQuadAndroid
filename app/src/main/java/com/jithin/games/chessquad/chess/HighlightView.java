@@ -5,6 +5,8 @@ import android.support.constraint.ConstraintLayout;
 import android.widget.ImageView;
 import com.jithin.games.chessquad.R;
 
+import static com.jithin.games.chessquad.chess.Utls.intOf;
+
 /**
  * Created by jithin on 23/1/18.
  */
@@ -24,6 +26,7 @@ public class HighlightView extends ImageView {
         Xcoord = x;
         Ycoord = y;
         this.setId(id);
-        board.setPosition(this.getId(), Xcoord, Ycoord);
+        this.setX(intOf(Xcoord)*board.unit);
+        this.setY(intOf(Ycoord)*board.unit);
     }
 }

@@ -45,24 +45,16 @@ public class Piece extends ImageView{
     public Piece(final Board board, String piece, char side, int id){
         super(board.layout.getContext());
         this.board = board;
-        final ConstraintLayout layout = board.layout;
         X = piece.charAt(0);
         Y = piece.charAt(1);
         color = piece.charAt(2);
         type = piece.charAt(3);
         this.side = side;
-//        this.setId(id);
 
-        Context context = layout.getContext();
-
+        Context context = board.layout.getContext();
         this.setLayoutParams(new ConstraintLayout.LayoutParams(board.unit,board.unit));
-        ConstraintSet conSet = new ConstraintSet();
-        conSet.clone(board.layout);
-        int guide_x = board.resources.getIdentifier("glx"+X, "id", context.getPackageName());
-        int guide_y = board.resources.getIdentifier("gly"+Y, "id", context.getPackageName());
-
         setImage(context);
-        attachToBoard(board, this, /*conSet, */ id, guide_x, guide_y);
+        attachToBoard(board, this, id, X, Y);
     }
 
     public void setImage(Context context) {
@@ -72,19 +64,15 @@ public class Piece extends ImageView{
     }
 
     public void attachToBoard(final Board board, final View view,
-                              final int view_id, final int guide_x, final int guide_y){
+                              final int view_id, final char x, final char y){
         ((GameActivity)getContext()).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Log.d("Piece", "attaching");
                 board.layout.addView(view);
                 view.setOnClickListener(board.pieceListener);
                 view.setId(view_id);
-                ConstraintSet constraintSet = new ConstraintSet();
-                constraintSet.clone(board.layout);
-                constraintSet.connect(view_id, ConstraintSet.LEFT, guide_x, ConstraintSet.LEFT, 0);
-                constraintSet.connect(view_id, ConstraintSet.BOTTOM, guide_y, ConstraintSet.BOTTOM, 0);
-                board.setPosition(constraintSet);
+                view.setX(board.unit*intOf(x));
+                view.setY(board.unit*intOf(y));
             }
         });
     }
@@ -100,7 +88,8 @@ public class Piece extends ImageView{
     public void moveTo(char x, char y){
         this.X = x;
         this.Y = y;
-        this.board.setPosition(this.getId(), this.X, this.Y);
+        this.setX(intOf(x)*board.unit);
+        this.setY(intOf(y)*board.unit);
     }
 
     public void addHighlight(){

@@ -30,35 +30,15 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        layout = (ConstraintLayout) findViewById(R.id.board);
+        layout = findViewById(R.id.board);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         this.getWindowManager().getDefaultDisplay()
                 .getMetrics(displayMetrics);
 
         board = new Board(layout, displayMetrics.widthPixels/12);
         LoadBoard loadBoard = new LoadBoard();
-        loadBoard.execute(this.board);
+        loadBoard.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, this.board);
     }
-//
-//    public void addToLayout(final View view){
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                layout.addView(view);
-//            }
-//        });
-//    }
-
-    public void applyToLayout(final ConstraintSet constraintSet){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                constraintSet.applyTo(layout);
-            }
-        });
-    }
-
-//    public void addListener
 
 }
 

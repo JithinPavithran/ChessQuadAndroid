@@ -19,13 +19,15 @@ public class Pawn extends Piece {
     @Override
     public void addHighlight(){
         Log.d("Adding Highlight", "Pawn");
-        if(this.Y != 'b'){
-            if(board.mtx[intOf(X)][intOf(next(Y))] == null) {
-                board.addHighlight(X, next(Y));
-                if (Y == '1' && board.mtx[intOf(X)][intOf(next(next(Y)))]==null) {
-                    board.addHighlight(X, next(next(Y)));
+        if(this.Y != '1'){
+            /* UP move */
+            if(board.mtx[intOf(X)][intOf(up(Y))] == null) {
+                board.addHighlight(X, up(Y));
+                if (Y == 'a' && board.mtx[intOf(X)][intOf(up(up(Y)))]==null) {
+                    board.addHighlight(X, up(up(Y)));
                 }
             }
+            /* Cross moves */
             if(X!='b' && board.mtx[intOf(right(X))][intOf(up(Y))]!=null &&
                     board.mtx[intOf(right(X))][intOf(up(Y))].side!=Board.MINE){
                 board.addHighlight(right(X), up(Y));
