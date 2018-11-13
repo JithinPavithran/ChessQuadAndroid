@@ -1,14 +1,18 @@
 package com.jithin.games.chessquad.chess;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TimingLogger;
 import android.widget.ImageView;
+import com.jithin.games.chessquad.GameActivity;
 import com.jithin.games.chessquad.R;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -16,13 +20,12 @@ import java.util.List;
 
 import static com.jithin.games.chessquad.chess.Utls.hex;
 import static com.jithin.games.chessquad.chess.Utls.intOf;
-import static com.jithin.games.chessquad.chess.Utls.next;
 
 /**
  * Created by jithin on 16/1/18.
  */
 
-public class Board{
+public class Board extends AsyncTask<Object, Void, Void>{
     public static final char RIGHT  = 'r';
     public static final char BOTTOM = 'b';
     public static final char TOP    = 't';
@@ -67,11 +70,19 @@ public class Board{
         this.pieceListener = new PieceListener(this);
         this.maxId = 1000;
         this.maxHighId = 2000;
+        this.mtx = new Piece[12][12];
+    }
 
-        mtx = new Piece[12][12];
-        for (Piece[] row: this.mtx){
-            Arrays.fill(row, null);
+    protected Void doInBackground(Object ... object){
+        Method method = (Method)object[0];
+        try {
+            method.invoke(object[1]);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
         }
+        return null;
     }
 
     protected void playerInit(char mycolor){
@@ -84,12 +95,27 @@ public class Board{
         }
     }
     public void init(){
-        set_inactive();
-        set_top();
-        set_right();
-        set_left();
-        set_bottom();
+        try {
+            Method method = Board.class.getMethod("set_top");
+            doInBackground(method, this);
+            method = Board.class.getMethod("set_right");
+            doInBackground(method, this);
+            method = Board.class.getMethod("set_left");
+            doInBackground(method, this);
+            method = Board.class.getMethod("set_bottom");
+            doInBackground(method, this);
+            method = Board.class.getMethod("set_inactive");
+            doInBackground(method, this);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+//        set_bottom();
+//        set_inactive();
+//        set_left();
+//        set_right();
+//        set_top();
     }
+
     protected void set_inactive(){
         addPiece(0,0,Piece.DUMMY, Board.MINE);
         addPiece(0,1,Piece.DUMMY, Board.MINE);
@@ -277,7 +303,21 @@ public class Board{
         conSet.connect(id, ConstraintSet.LEFT, resources.getIdentifier("glx"+x, "id", context.getPackageName()), ConstraintSet.LEFT, 0);
         conSet.connect(id, ConstraintSet.BOTTOM, resources.getIdentifier("gly"+y, "id", context.getPackageName()), ConstraintSet.BOTTOM, 0);
         conSet.applyTo(layout);
+//        final ConstraintSet _conSet = conSet;
+//
+//        ((GameActivity)layout.getContext()).runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                _conSet.applyTo(layout);
+//            }
+//        });
+
     }
+
+    public void setPosition(ConstraintSet constraintSet){
+        constraintSet.applyTo(layout);
+    }
+
 
     public boolean validCell(char x, char y) {
         return !((x == '0' || x == '1' || x == 'a' || x == 'b')
