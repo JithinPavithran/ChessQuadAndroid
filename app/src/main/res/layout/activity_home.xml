@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/goToGame"
             android:id="@+id/login"
-            android:onClick="login"/>
+            android:onClick="signIn"/>
 
     <Button
         android:text="Logout"
@@ -27,6 +27,33 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/login"
         android:id="@+id/logout"
-        android:onClick="logout"/>
+        android:onClick="signOut"/>
+
+    <Button
+        android:text="Quick Game"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/logout"
+        android:id="@+id/quickGame"
+        android:onClick="startQuickGame"/>
+
+    <Button
+        android:text="End Game"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/quickGame"
+        android:id="@+id/endGame"
+        android:onClick="endGame"/>
+
+    <TextView
+            android:text="User E-mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:id="@+id/email"/>
+
 
 </android.support.constraint.ConstraintLayout>

@@ -1,22 +1,12 @@
 package com.jithin.games.chessquad.chess;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
-import android.support.v7.widget.AppCompatImageView;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.ImageView;
 import com.jithin.games.chessquad.GameActivity;
-import com.jithin.games.chessquad.R;
 
 import static com.jithin.games.chessquad.chess.Utls.intOf;
-import static com.jithin.games.chessquad.chess.Utls.next;
 
 /**
  * Created by jithin on 13/1/18.

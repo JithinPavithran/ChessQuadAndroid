@@ -1,17 +1,10 @@
 package com.jithin.games.chessquad;
 
-import android.app.Activity;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewTreeObserver;
 import com.jithin.games.chessquad.chess.Board;
 
 public class GameActivity extends AppCompatActivity {
